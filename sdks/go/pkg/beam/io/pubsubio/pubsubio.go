@@ -20,12 +20,12 @@ package pubsubio
 import (
 	"reflect"
 
-	"github.com/apache/beam/sdks/go/pkg/beam"
-	"github.com/apache/beam/sdks/go/pkg/beam/core/typex"
-	"github.com/apache/beam/sdks/go/pkg/beam/core/util/protox"
-	"github.com/apache/beam/sdks/go/pkg/beam/core/util/reflectx"
-	pipepb "github.com/apache/beam/sdks/go/pkg/beam/model/pipeline_v1"
-	"github.com/apache/beam/sdks/go/pkg/beam/util/pubsubx"
+	"github.com/apache/beam/sdks/v2/go/pkg/beam"
+	"github.com/apache/beam/sdks/v2/go/pkg/beam/core/typex"
+	"github.com/apache/beam/sdks/v2/go/pkg/beam/core/util/protox"
+	"github.com/apache/beam/sdks/v2/go/pkg/beam/core/util/reflectx"
+	pipepb "github.com/apache/beam/sdks/v2/go/pkg/beam/model/pipeline_v1"
+	"github.com/apache/beam/sdks/v2/go/pkg/beam/util/pubsubx"
 	pb "google.golang.org/genproto/googleapis/pubsub/v1"
 	"google.golang.org/protobuf/proto"
 )
@@ -67,7 +67,7 @@ func Read(s beam.Scope, project, topic string, opts *ReadOptions) beam.PCollecti
 	}
 
 	out := beam.External(s, readURN, protox.MustEncode(payload), nil, []beam.FullType{typex.New(reflectx.ByteSlice)}, false)
-	if opts.WithAttributes {
+	if opts != nil && opts.WithAttributes {
 		return beam.ParDo(s, unmarshalMessageFn, out[0])
 	}
 	return out[0]

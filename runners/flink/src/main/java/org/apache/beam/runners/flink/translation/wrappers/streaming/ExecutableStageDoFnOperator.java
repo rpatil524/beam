@@ -221,6 +221,11 @@ public class ExecutableStageDoFnOperator<InputT, OutputT> extends DoFnOperator<I
     this.windowCoder = (Coder<BoundedWindow>) windowingStrategy.getWindowFn().windowCoder();
     this.inputCoder = windowedInputCoder;
     this.pipelineOptions = new SerializablePipelineOptions(options);
+
+    Preconditions.checkArgument(
+        !windowedInputCoder.getCoderArguments().isEmpty(),
+        "Empty arguments for WindowedValue Coder %s",
+        windowedInputCoder);
   }
 
   @Override
@@ -596,7 +601,8 @@ public class ExecutableStageDoFnOperator<InputT, OutputT> extends DoFnOperator<I
     }
 
     @Override
-    public void deleteTimer(StateNamespace namespace, String timerId, TimeDomain timeDomain) {
+    public void deleteTimer(
+        StateNamespace namespace, String timerId, String timerFamilyId, TimeDomain timeDomain) {
       throw new UnsupportedOperationException(
           "It is not expected to use SdfFlinkTimerInternals to delete a timer");
     }

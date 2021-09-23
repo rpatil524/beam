@@ -122,7 +122,7 @@ $ mvn package -Pflink-runner
 
 {{< paragraph class="language-java" >}}
 Look for the output JAR of this command in the
-install apache_beam``target` folder.
+`target` folder.
 {{< /paragraph >}}
 
 {{< paragraph class="language-java" >}}
@@ -327,7 +327,7 @@ To find out which version of Flink is compatible with Beam please see the table 
   <th>Artifact Id</th>
 </tr>
 <tr>
-  <td rowspan="4">&ge; 2.31.0</td>
+  <td rowspan="3">&ge; 2.31.0</td>
   <td>1.13.x <sup>*</sup></td>
   <td>beam-runners-flink-1.13</td>
 </tr>
@@ -338,10 +338,6 @@ To find out which version of Flink is compatible with Beam please see the table 
 <tr>
   <td>1.11.x <sup>*</sup></td>
   <td>beam-runners-flink-1.11</td>
-</tr>
-<tr>
-  <td>1.10.x</td>
-  <td>beam-runners-flink-1.10</td>
 </tr>
 <tr>
   <td rowspan="3">2.30.0</td>
@@ -504,4 +500,3 @@ capabilities of the classic Flink Runner.
 The [Portable Capability
 Matrix](https://s.apache.org/apache-beam-portability-support-table) documents
 the capabilities of the portable Flink Runner.
-
